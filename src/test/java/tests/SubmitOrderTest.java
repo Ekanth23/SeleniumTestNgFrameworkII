@@ -5,24 +5,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
+import testComponents.BaseClass;
+
+import java.io.IOException;
 import java.util.*;
 
 import java.time.Duration;
 
-public class SubmitOrderTest {
-
-    public static void main(String[] args) throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
+public class SubmitOrderTest extends BaseClass {
+    @Test
+    public void submitOrder() throws IOException, InterruptedException {
         String productName = "ZARA COAT 3";
-
-        WebDriverWait ww =new WebDriverWait(driver, Duration.ofSeconds(5));
-
-        LandingPage landingPage = new LandingPage(driver);
-        landingPage.goTo();
-        com.pages.ProductCatalogue productCatalogue =landingPage.launchApplication("autotester001@gmail.com", "Pass12345");
+        ProductCatalogue productCatalogue = landingPage.loginApplication("autotester001@gmail.com", "Pass12345");
 
         productCatalogue.addProductToCart(productName);
         CartPage cartPage =productCatalogue.navigateToCartPage();
@@ -37,7 +32,5 @@ public class SubmitOrderTest {
 
         String actualConfirmationMessage = orderConfirmationPage.orderConfirmation();
         Assert.assertEquals(actualConfirmationMessage, "THANKYOU FOR THE ORDER.");
-
-        driver.quit();
     }
 }

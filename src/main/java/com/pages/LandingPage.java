@@ -25,6 +25,9 @@ public class LandingPage extends AbstractComponent {
     @FindBy(css = "#login")
     WebElement eleLogin;
 
+    @FindBy(id ="toast-container")
+    WebElement loginErrorMessage;
+
 
 
 
@@ -34,13 +37,21 @@ public class LandingPage extends AbstractComponent {
 
     }
 
-    public ProductCatalogue launchApplication(String txtEmail, String txtPass)
+    public ProductCatalogue loginApplication(String txtEmail, String txtPass)
     {
         eleEmail.sendKeys(txtEmail);
         elePass.sendKeys(txtPass);
         eleLogin.click();
         ProductCatalogue productCatalogue = new ProductCatalogue(driver);
         return productCatalogue;
+
+    }
+
+    public String getLoginErrorMessage()
+    {
+        waitForElementToAppear(loginErrorMessage);
+        return loginErrorMessage.getText();
+
     }
 
 

@@ -37,6 +37,12 @@ public class AbstractComponent {
         ww.until(ExpectedConditions.visibilityOfElementLocated(byLocator));
     }
 
+    public void waitForElementToAppear(WebElement ele)
+    {
+        ww =new WebDriverWait(driver, Duration.ofSeconds(5));
+        ww.until(ExpectedConditions.visibilityOf(ele));
+    }
+
     public void waitForElementToDissAppear(WebElement ele) throws InterruptedException {
         Thread.sleep(2000);
 //        ww =new WebDriverWait(driver, Duration.ofSeconds(5));
