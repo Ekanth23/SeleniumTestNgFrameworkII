@@ -11,9 +11,11 @@ import testComponents.BaseClass;
 import java.io.IOException;
 
 public class ErrorValidationTest extends BaseClass {
-    @Test
+
+    String productName = "ZARA COAT 3";
+    @Test(groups = {"loginError"})
     public void loginErrorValidation() throws IOException, InterruptedException {
-        String productName = "ZARA COAT 3";
+
         landingPage.loginApplication("autotester002@gmail.com", "Pass");
         String actualLoginErrorMessage = landingPage.getLoginErrorMessage();
         Assert.assertEquals(actualLoginErrorMessage, "Incorrect email or password.");
@@ -22,7 +24,6 @@ public class ErrorValidationTest extends BaseClass {
 
     @Test
     public void productErrorValidation() throws IOException, InterruptedException {
-        String productName = "ZARA COAT 3";
         ProductCatalogue productCatalogue = landingPage.loginApplication("autotester003@gmail.com", "Pass12345");
 
         productCatalogue.addProductToCart(productName);

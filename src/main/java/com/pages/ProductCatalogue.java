@@ -56,12 +56,7 @@ public class ProductCatalogue extends AbstractComponent {
         waitForElementToDissAppear(spinner);
     }
 
-    public CartPage navigateToCartPage() {
-        cartHeader.click();
 
-        CartPage cartPage = new CartPage(driver);
-        return cartPage;
-    }
 
 
 }

@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Automation Suite">
+    <test name="Error Validation Test">
+        <classes>
+            <class name="tests.ErrorValidationTest"/>
+        </classes>
+    </test>
+    <test name="Submit Order Test">
+        <classes>
+            <class name="tests.SubmitOrderTest"/>
+        </classes>
+    </test>
+</suite>

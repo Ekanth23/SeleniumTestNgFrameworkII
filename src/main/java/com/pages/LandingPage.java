@@ -49,7 +49,7 @@ public class LandingPage extends AbstractComponent {
 
     public String getLoginErrorMessage()
     {
-        waitForElementToAppear(loginErrorMessage);
+        waitForWebElementToAppear(loginErrorMessage);
         return loginErrorMessage.getText();
 
     }
