@@ -43,19 +43,23 @@ public class SubmitOrderTest extends BaseClass {
     }
 
     @DataProvider
-    public Object[][] getData() {
-        HashMap<String, String> map = new HashMap<>();
-        map.put("email", "autotester001@gmail.com");
-        map.put("pass", "Pass12345");
-        map.put("prod", "ZARA COAT 3");
+    public Object[][] getData() throws IOException {
 
-        HashMap<String, String> map1 = new HashMap<>();
-        map1.put("email", "autotester002@gmail.com");
-        map1.put("pass", "Pass12345");
-        map1.put("prod", "ADIDAS ORIGINAL");
+        List<HashMap<String, String>> data = getJsonDataToMap(System.getProperty("user.dir")+"\\src\\test\\java\\data\\PurchaseOrder.json");
 
-        return new Object[][]{{map}, {map1}};
+        return new Object[][]{{data.get(0)}, {data.get(1)}};
     }
 
     //        return new Object[][]{{"autotester001@gmail.com", "Pass12345", "ZARA COAT 3"}, {"autotester002@gmail.com", "Pass12345", "ADIDAS ORIGINAL"}};
-}
+
+//    HashMap<String, String> map = new HashMap<>();
+//        map.put("email", "autotester001@gmail.com");
+//        map.put("pass", "Pass12345");
+//        map.put("prod", "ZARA COAT 3");
+//
+//    HashMap<String, String> map1 = new HashMap<>();
+//        map1.put("email", "autotester002@gmail.com");
+//        map1.put("pass", "Pass12345");
+//        map1.put("prod", "ADIDAS ORIGINAL");
+
+    }

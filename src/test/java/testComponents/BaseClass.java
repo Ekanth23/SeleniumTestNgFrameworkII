@@ -1,16 +1,23 @@
 package testComponents;
 
 import com.pages.LandingPage;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 public class BaseClass {
@@ -58,4 +65,17 @@ public class BaseClass {
     {
         driver.quit();
     }
+
+    public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws IOException {
+
+//        String path = System.getProperty("user.dir")+"\\src\\test\\java\\data\\PurchaseOrder.json";
+
+        String jsonStr=FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
+
+        ObjectMapper mapper = new ObjectMapper();
+        List<HashMap<String, String>> data =mapper.readValue(jsonStr, new TypeReference<List<HashMap<String, String>>>() {});
+
+        return data;
+    }
+
 }
