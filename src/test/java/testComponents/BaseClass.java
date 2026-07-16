@@ -2,6 +2,8 @@ package testComponents;
 
 import com.pages.LandingPage;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -51,6 +53,13 @@ public class BaseClass {
 
     }
 
+    public String getScreenshot(String testCaseName, WebDriver driver) throws IOException {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File src =ts.getScreenshotAs(OutputType.FILE);
+        File dest = new File(System.getProperty("user.dir")+"//reports//"+testCaseName+"+.png+");
+        FileUtils.copyFile(src,dest);
+        return System.getProperty("user.dir")+"//reports//"+testCaseName+"+.png+";
+    }
 
     @BeforeMethod(alwaysRun = true)
     public LandingPage launchApplication() throws IOException {
@@ -70,7 +79,6 @@ public class BaseClass {
 
     public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws IOException {
 
-
         String jsonStr=FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
 
         ObjectMapper mapper = new ObjectMapper();
@@ -79,5 +87,7 @@ public class BaseClass {
 
         return data;
     }
+
+
 
 }
