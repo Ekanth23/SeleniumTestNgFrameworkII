@@ -1,6 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite parallel="tests" name="Automation Suite">
+
+<listeners>
+    <listener class-name="testComponents.Listeners"/>
+</listeners>
+
     <test name="Error Validation Test">
         <classes>
             <class name="tests.ErrorValidationTest"/>
