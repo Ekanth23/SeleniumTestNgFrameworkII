@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.resources.ExtentReportTestNG;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -34,9 +35,15 @@ public class Listeners extends BaseClass implements ITestListener {
         ITestListener.super.onTestFailure(result);
         extendTestThreadLocal.get().fail(result.getThrowable());
 
-        String screenshotPath;
         try {
-            screenshotPath = getScreenshot(result.getMethod().getMethodName());
+            driver = (WebDriver) result.getClass().getDeclaredField("driver").get(result.getInstance());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        String screenshotPath = null;
+        try {
+            screenshotPath = getScreenshot(result.getMethod().getMethodName(), driver);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
