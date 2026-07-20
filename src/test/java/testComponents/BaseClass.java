@@ -69,17 +69,20 @@ public class BaseClass {
         return landingPage;
     }
 
+    
     @AfterMethod(alwaysRun = true)
     public void tearDown()
     {
         driver.quit();
     }
+    
 
     public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws IOException {
 
         String jsonStr=FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
 
         ObjectMapper mapper = new ObjectMapper();
+        
         List<HashMap<String, String>> data =mapper.readValue(jsonStr, new TypeReference<List<HashMap<String, String>>>() {});
 
         return data;
